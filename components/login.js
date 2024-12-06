@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, TouchableOpacity, Text, StyleSheet, Alert } from 'react-native';
+import { View, TextInput, TouchableOpacity, Text, StyleSheet, Alert, Image } from 'react-native';
 
 const LoginScreen = () => {
     const [email, setEmail] = useState('');
@@ -7,7 +7,7 @@ const LoginScreen = () => {
 
     const handleLogin = async () => {
         try {
-            const response = await fetch('http://192.168.1.144:8000/api/auth-movil', {
+            const response = await fetch('http://192.168.1.64:8000/api/auth-movil', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -37,17 +37,23 @@ const LoginScreen = () => {
 
     return (
         <View style={styles.container}>
+            <Image
+                source= {require('../assets/logo_clinica.png') }
+                style={styles.logo}
+            />
+            <Text style={styles.title}>Correo electrónico:</Text>
             <TextInput
                 style={styles.input}
-                placeholder="Correo electrónico"
+                placeholder="Ingrese su correo electrónico"
                 value={email}
                 onChangeText={setEmail}
                 keyboardType="email-address"
                 autoCapitalize="none"
             />
+            <Text style={styles.title}>Contraseña:</Text>
             <TextInput
                 style={styles.input}
-                placeholder="Contraseña"
+                placeholder="Ingrese su contraseña"
                 value={password}
                 onChangeText={setPassword}
                 secureTextEntry
@@ -65,6 +71,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: 20,
+        backgroundColor: '#fff'
+    },
+    logo: {
+        width: 250, // Ajusta el tamaño según sea necesario
+        height: 250,
+        marginTop: -100,
+        marginBottom: 0, // Espaciado debajo de la imagen
     },
     input: {
         width: '100%',
@@ -76,17 +89,24 @@ const styles = StyleSheet.create({
         borderRadius: 5,
     },
     button: {
-        backgroundColor: '#007AFF',
+        backgroundColor: '#1BACB1',
         padding: 10,
         borderRadius: 5,
         width: '100%',
         alignItems: 'center',
+        marginTop: 20
     },
     buttonText: {
         color: 'white',
         fontSize: 16,
         fontWeight: 'bold',
     },
+    title: {
+        marginBottom: 10,
+        alignSelf: 'flex-start',
+        fontSize: 16,
+        fontWeight: 'bold',
+    }
 });
 
 export default LoginScreen;
